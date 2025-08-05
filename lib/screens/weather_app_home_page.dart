@@ -91,6 +91,8 @@ class _WeatherAppHomePageState extends State<WeatherAppHomePage> {
                 }
                 final data = snapshot.data! ;
                 // for daily widget--- a list containing only required data 
+
+
                 List <Map<String, dynamic>> dailyWeatherData = [];
                 for(int i = 0; i <= 39; i+=8){
                   dailyWeatherData.add(data['list'][i]);
