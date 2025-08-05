@@ -95,7 +95,6 @@ class _WeatherAppHomePageState extends State<WeatherAppHomePage> {
                 for(int i = 0; i <= 39; i+=8){
                   dailyWeatherData.add(data['list'][i]);
                 }
-                print(dailyWeatherData);
 
                 // ----------
                 final currentWeatherData = data['list'][0];
