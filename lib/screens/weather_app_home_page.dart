@@ -90,6 +90,14 @@ class _WeatherAppHomePageState extends State<WeatherAppHomePage> {
                   return Center(child: Text(snapshot.error.toString()),);
                 }
                 final data = snapshot.data! ;
+                // for daily widget--- a list containing only required data 
+                List <Map<String, dynamic>> dailyWeatherData = [];
+                for(int i = 0; i <= 39; i+=8){
+                  dailyWeatherData.add(data['list'][i]);
+                }
+                print(dailyWeatherData);
+
+                // ----------
                 final currentWeatherData = data['list'][0];
                 final currentTemp = (currentWeatherData['main']['temp'] - 273.15).toStringAsFixed(0);
                 final currrentSky = currentWeatherData['weather'][0]['main'];
@@ -169,10 +177,60 @@ class _WeatherAppHomePageState extends State<WeatherAppHomePage> {
                                 color: index == 0? Colors.deepPurpleAccent : null ,
                               );
                             },
-                            ),
+                          ),
                         ),
                         SizedBox(height: 20,),
-                        DailyForecastWidget(),
+                        SizedBox(
+                          height: 380,
+                          child: Card(
+                            elevation: 6,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.all(8),
+                                    alignment: Alignment.topLeft,
+                                    child: Text(
+                                      'Daily Forecast',
+                                      style: TextStyle(
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: ListView.builder(
+                                      scrollDirection: Axis.vertical,
+                                      itemCount: data.length,
+                                      itemBuilder:(context, index) {
+                                        final dailyData = dailyWeatherData[index];
+                                        final dailySky = dailyData['weather'][0]['main'];
+                                        final date = dailyData['dt'];
+                                        String dailySkyAnimation = 'assets/sunny.json';
+                                        if (dailySky == 'Rain' || dailySky == 'Drizzle'){
+                                          dailySkyAnimation = 'assets/rain.json';
+                                        }if (dailySky == 'Clouds'){
+                                          dailySkyAnimation = 'assets/partly cloud.json';
+                                        }if (dailySky == 'Thunderstorm'){
+                                          dailySkyAnimation = 'assets/storm.json';
+                                        }if (dailySky == 'Atmosphere'){
+                                          dailySkyAnimation = 'assets/mist.json';
+                                        }
+                                        return DailyForecastItem(
+                                          tempMax: (dailyData['main']['temp_max'] - 273.15).toStringAsFixed(0),
+                                          day: date,
+                                          icon: dailySkyAnimation,
+                                          color: index == 0? Colors.deepPurpleAccent : null,
+                                        );
+                                      }
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
                         SizedBox(height: 25,),
                         Container(
                           width: double.infinity,
