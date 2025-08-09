@@ -11,3 +11,5 @@ It fetches real-time data from the OpenWeather API, ensuring users get reliable 
 Whether you're planning your day or tracking changing conditions, this app delivers a clear and intuitive experience
 
 [A Demo Video](https://drive.google.com/file/d/1ck3awQohEcCKPoWmht0OcfFAnzq44V-9/view?usp=drivesdk)
+
+[Dynamic Theme](https://drive.google.com/file/d/1ewKFuPGZq4mCeAWbJvgTe0cjHXTEAKx9/view?usp=drivesdk)
